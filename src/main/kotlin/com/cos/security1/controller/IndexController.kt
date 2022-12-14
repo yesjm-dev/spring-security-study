@@ -2,6 +2,8 @@ package com.cos.security1.controller
 
 import com.cos.security1.model.User
 import com.cos.security1.repository.UserRepository
+import org.springframework.security.access.annotation.Secured
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -66,5 +68,19 @@ class IndexController(
     @GetMapping("/joinProc")
     fun joinProc(): String {
         return "회원가입 완료됨"
+    }
+
+    @Secured("ROLE_ADMIN") // 특정 api 에만 권한 설정을 하고 싶은 경우에 사용
+    @ResponseBody
+    @GetMapping("/info")
+    fun info(): String {
+        return "개인정보"
+    }
+
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") // 특정 api 에만 권한 설정을 하고 싶은 경우에 사용
+    @ResponseBody
+    @GetMapping("/data")
+    fun data(): String {
+        return "데이터정보"
     }
 }
