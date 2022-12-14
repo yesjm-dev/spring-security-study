@@ -31,7 +31,10 @@ class SecurityConfig {
                     .anyRequest().permitAll()
                     .and()
                     .formLogin()
-                    .loginPage("/login")
+                    .loginPage("/loginForm")
+//                    .usernameParameter("userNickname") -> username 으로 파라미터 안받으려면 설정 필요
+                    .loginProcessingUrl("/login") // login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인 진행해줌 -> login controller 가 필요없어짐
+                    .defaultSuccessUrl("/")
             }
             .httpBasic(withDefaults())
             .cors().and()
@@ -39,7 +42,5 @@ class SecurityConfig {
 
         return http.build()
     }
-
-
 
 }
