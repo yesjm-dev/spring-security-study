@@ -1,4 +1,4 @@
-package com.cos.security1.config.auth
+package com.cos.security1.config.oauth
 
 import com.cos.security1.model.User
 import org.springframework.security.core.GrantedAuthority

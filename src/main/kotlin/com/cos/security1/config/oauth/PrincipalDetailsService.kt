@@ -1,4 +1,4 @@
-package com.cos.security1.config.auth
+package com.cos.security1.config.oauth
 
 import com.cos.security1.repository.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
