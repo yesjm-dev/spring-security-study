@@ -4,6 +4,7 @@ import com.cos.security1.model.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.oauth2.core.user.OAuth2User
 
 
 // 시큐리티가 /login 주소 요청이 오면 낚아채서 로그인 진행
@@ -17,7 +18,9 @@ import org.springframework.security.core.userdetails.UserDetails
 
 class PrincipalDetails(
     private val user: User // 콤포지션
-) : UserDetails {
+) : UserDetails, OAuth2User {
+
+    fun getUser() = user
 
     // 해당 User 의 권한을 리턴하는 곳
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
@@ -52,4 +55,11 @@ class PrincipalDetails(
         return true
     }
 
+    override fun getName(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAttributes(): MutableMap<String, Any> {
+        TODO("Not yet implemented")
+    }
 }

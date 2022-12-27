@@ -1,10 +1,13 @@
 package com.cos.security1.controller
 
+import com.cos.security1.config.oauth.PrincipalDetails
 import com.cos.security1.model.User
 import com.cos.security1.repository.UserRepository
 import org.springframework.security.access.annotation.Secured
 import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,6 +18,26 @@ class IndexController(
     private val userRepository: UserRepository,
     private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ) {
+
+    @GetMapping("/test/login")
+    @ResponseBody
+    fun loginTest(authentication: Authentication): String {
+        println("/test/login =================")
+        val principalDetails: PrincipalDetails = authentication.principal as PrincipalDetails
+        println("authentication: ${principalDetails.getUser()}")
+
+        return "세션 정보 확인하기"
+    }
+
+    @GetMapping("/test/oauth/login")
+    @ResponseBody
+    fun testOAuthLogin(authentication: Authentication): String {
+        println("/test/oauth/login =================")
+        val oauth2User: OAuth2User = authentication.principal as OAuth2User
+        println("authentication: ${oauth2User.attributes}")
+
+        return "OAuth 세션 정보 확인하기"
+    }
 
     // localhost:8080
     @GetMapping("/")
