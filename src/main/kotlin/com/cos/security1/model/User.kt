@@ -19,5 +19,5 @@ class User (
     var provider: String? = null,
     var providerId: String? = null,
     @CreationTimestamp
-    val createDate: Timestamp? = null
+    var createDate: Timestamp? = null
 )

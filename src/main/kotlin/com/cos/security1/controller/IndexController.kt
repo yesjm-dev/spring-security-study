@@ -6,6 +6,7 @@ import com.cos.security1.repository.UserRepository
 import org.springframework.security.access.annotation.Secured
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.Authentication
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Controller
@@ -49,7 +50,8 @@ class IndexController(
 
     @ResponseBody
     @GetMapping("/user")
-    fun user(): String {
+    fun user(@AuthenticationPrincipal principalDetails: PrincipalDetails): String {
+        println("principalDetails: ${principalDetails.getUser().username}")
         return "user"
     }
 

@@ -17,7 +17,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User
 // Security Session => Authentication => UserDetails(PrincipalDetails)
 
 class PrincipalDetails(
-    private val user: User // 콤포지션
+    private val user: User, // 콤포지션
+    private val attributes:  MutableMap<String, Any>? = null
 ) : UserDetails, OAuth2User {
 
     fun getUser() = user
@@ -55,11 +56,11 @@ class PrincipalDetails(
         return true
     }
 
-    override fun getName(): String {
-        TODO("Not yet implemented")
+    override fun getName(): String? {
+        return null
     }
 
-    override fun getAttributes(): MutableMap<String, Any> {
-        TODO("Not yet implemented")
+    override fun getAttributes(): MutableMap<String, Any>? {
+        return attributes
     }
 }

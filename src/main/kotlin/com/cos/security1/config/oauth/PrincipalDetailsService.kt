@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service
 
 // 시큐리티 설정에서 loginProcessingUrl("/login")
 // /login 요청이 오면 자동으로 UserDetailsService 타입으로 IoC되어 있는 loadUserByUsername 함수가 실행됨 (규칙)
+
 @Service
 class PrincipalDetailsService(
     private val userRepository: UserRepository
